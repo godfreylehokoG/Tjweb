@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T Junction Tavern | Where Food, Drinks & Community Intersect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --gray: #444;
+            --light-gray: #e9e9e9;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(26, 26, 26, 0.95);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a.active {
+            color: var(--secondary);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #a30000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        /* Hero Section - Fullscreen Video Background with Underlay */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            color: white;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-underlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -3;
+            filter: blur(0px);
+        }
+
+        .hero-underlay-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            z-index: -2;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .hero-video.loaded {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button.secondary {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .cta-button.secondary:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* Video Load Indicator */
+        .video-loading {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.5s;
+        }
+
+        .video-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-loading .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .experience-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .experience-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .experience-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .experience-card:hover .experience-icon {
+            background-color: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .experience-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Atmosphere Section */
+        .atmosphere {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: white;
+            position: relative;
+        }
+
+        .atmosphere .section-title h2 {
+            color: white;
+        }
+
+        .atmosphere-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .atmosphere-text {
+            flex: 1;
+        }
+
+        .atmosphere-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .atmosphere-text p {
+            margin-bottom: 25px;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .atmosphere-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .atmosphere-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .atmosphere-feature i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .atmosphere-gallery {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 200px;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            height: 250px;
+        }
+
+        /* Menu Highlights Section */
+        .menu-highlights {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            background-color: var(--light);
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .menu-tab:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .menu-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary);
+        }
+
+        .menu-item-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-details {
+            padding: 25px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .menu-item-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .menu-item-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Events Preview Section */
+        .events-preview {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-date {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .event-date .day {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .event-date .month {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .event-content {
+            padding: 25px;
+        }
+
+        .event-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .event-time {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 100px 0;
+            background-color: var(--dark);
+            color: white;
+        }
+
+        .social-proof .section-title h2 {
+            color: white;
+        }
+
+        .proof-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .proof-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .awards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .award {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.3s;
+        }
+
+        .award:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .award i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Visit Today Section */
+        .visit-today {
+            padding: 100px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+        }
+
+        .visit-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .visit-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .visit-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+        }
+
+        .hours-info {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hours-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .atmosphere-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .visit-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .atmosphere-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item.large {
+                grid-column: span 1;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .video-loading {
+                bottom: 20px;
+                right: 20px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 70px 0;
+            }
+            
+            .hero {
+                min-height: 600px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .experience-card, .menu-item-details, .event-content {
+                padding: 20px;
+            }
+            
+            .proof-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-loading {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-beer logo-icon"></i>
+                <div class="logo-text">T <span>JUNCTION</span> TAVERN</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html#reservation" class="cta-button">Reserve a Table</a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Video and Underlay Image -->
+    <section class="hero">
+        <!-- Underlay image (shown immediately) -->
+        <div class="hero-underlay"></div>
+        <div class="hero-underlay-overlay"></div>
+        
+        <!-- Video overlay (fades in when loaded) -->
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-warm-and-cozy-interior-of-a-pub-41721-large.mp4" type="video/mp4">
+            <!-- If video fails to load, the underlay image will remain visible -->
+        </video>
+        
+        <!-- Dark overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Video loading indicator -->
+        <div class="video-loading" id="videoLoading">
+            <div class="spinner"></div>
+            <span>Loading video...</span>
+        </div>
+        
+        <!-- Hero content -->
+        <div class="container">
+            <div class="hero-content">
+                <h1>Where Food, Drinks <span>& Community Intersect</span></h1>
+                <p>Experience the perfect fusion of modern gastropub cuisine, craft beverages, and welcoming atmosphere at Cityville's favorite gathering spot.</p>
+                <div class="hero-buttons">
+                    <a href="menu.html" class="cta-button">Explore Our Menu</a>
+                    <a href="contact.html#reservation" class="cta-button secondary">Book Your Table</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>The T Junction Experience</h2>
+            </div>
+            
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Elevated Pub Fare</h3>
+                    <p>Classic comfort food reimagined with locally-sourced ingredients and modern culinary techniques. Our menu celebrates both tradition and innovation.</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-beer"></i>
+                    </div>
+                    <h3>Craft Beverage Program</h3>
+                    <p>42 rotating taps featuring local breweries, handcrafted cocktails with house-made syrups, and an extensive whiskey selection curated by our experts.</p>
+                </div>
+                
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community Hub</h3>
+                    <p>More than just a tavern - we're a gathering place. Weekly events, live music, and a welcoming atmosphere that feels like home.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atmosphere Section -->
+    <section class="atmosphere">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Atmosphere</h2>
+            </div>
+            
+            <div class="atmosphere-content">
+                <div class="atmosphere-text">
+                    <h3>Modern Comfort Meets Timeless Charm</h3>
+                    <p>Step into a space where contemporary design blends seamlessly with traditional tavern warmth. Exposed brick, warm wood accents, and ambient lighting create an inviting environment perfect for any occasion.</p>
+                    
+                    <div class="atmosphere-features">
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-fire"></i>
+                            <span>Cozy fireplaces</span>
+                        </div>
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-tree"></i>
+                            <span>Seasonal patio</span>
+                        </div>
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-tv"></i>
+                            <span>Sports viewing</span>
+                        </div>
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-music"></i>
+                            <span>Live entertainment</span>
+                        </div>
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free high-speed WiFi</span>
+                        </div>
+                        <div class="atmosphere-feature">
+                            <i class="fas fa-paw"></i>
+                            <span>Pet-friendly patio</span>
+                        </div>
+                    </div>
+                    
+                    <a href="about.html" class="cta-button" style="margin-top: 30px;">Discover More</a>
+                </div>
+                
+                <div class="atmosphere-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tavern Interior">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1519677100203-4f3c1f0f8c7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bar Area">
+                    </div>
+                    <div class="gallery-item large">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Food Presentation">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Highlights Section -->
+    <section class="menu-highlights">
+        <div class="container">
+            <div class="section-title">
+                <h2>Menu Highlights</h2>
+            </div>
+            
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-category="all">All</button>
+                <button class="menu-tab" data-category="starters">Starters</button>
+                <button class="menu-tab" data-category="mains">Mains</button>
+                <button class="menu-tab" data-category="drinks">Drinks</button>
+            </div>
+            
+            <div class="menu-items-grid">
+                <!-- Item 1 -->
+                <div class="menu-item" data-category="mains">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Junction Burger">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">The Junction Burger</h4>
+                            <div class="menu-item-price">$19</div>
+                        </div>
+                        <p class="menu-item-description">Our signature burger with black truffle aioli, aged cheddar, crispy shallots, and arugula on brioche.</p>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="menu-item" data-category="starters">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Truffle Parmesan Fries">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Truffle Parmesan Fries</h4>
+                            <div class="menu-item-price">$14</div>
+                        </div>
+                        <p class="menu-item-description">Hand-cut fries tossed in white truffle oil, grated Parmesan, and fresh herbs with garlic aioli.</p>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="menu-item" data-category="drinks">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Junction Old Fashioned">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Junction Old Fashioned</h4>
+                            <div class="menu-item-price">$14</div>
+                        </div>
+                        <p class="menu-item-description">Bourbon, house-made smoked maple syrup, orange bitters, and a Luxardo cherry.</p>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="menu-item" data-category="mains">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fish & Chips">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Beer-Battered Fish & Chips</h4>
+                            <div class="menu-item-price">$24</div>
+                        </div>
+                        <p class="menu-item-description">Local cod in house IPA batter with hand-cut fries, minted peas, and tartar sauce.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="menu.html" class="cta-button">View Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Preview Section -->
+    <section class="events-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>What's Happening</h2>
+            </div>
+            
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="day">TUE</div>
+                        <div class="month">Weekly</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>Trivia Night</h4>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i>
+                            <span>7:00 PM</span>
+                        </div>
+                        <p>Gather your smartest friends for our legendary trivia competition. Prizes for the top teams!</p>
+                        <a href="events.html" class="cta-button" style="margin-top: 15px; padding: 8px 20px; display: inline-block;">Details</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="day">THU</div>
+                        <div class="month">Weekly</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>Acoustic Sessions</h4>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i>
+                            <span>8:00 PM</span>
+                        </div>
+                        <p>Intimate performances from local and touring acoustic artists in our cozy tavern setting.</p>
+                        <a href="events.html" class="cta-button" style="margin-top: 15px; padding: 8px 20px; display: inline-block;">Details</a>
+                    </div>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="day">JUN 15</div>
+                        <div class="month">Special</div>
+                    </div>
+                    <div class="event-content">
+                        <h4>Brewmaster's Dinner</h4>
+                        <div class="event-time">
+                            <i class="far fa-clock"></i>
+                            <span>6:30 PM</span>
+                        </div>
+                        <p>A 5-course beer pairing dinner featuring local craft breweries. Limited seating available.</p>
+                        <a href="events.html" class="cta-button" style="margin-top: 15px; padding: 8px 20px; display: inline-block;">Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="events.html" class="cta-button">View All Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="section-title">
+                <h2>Celebrated & Recommended</h2>
+            </div>
+            
+            <div class="proof-stats">
+                <div class="proof-stat">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years in Business</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="stat-number">4.8★</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Craft Beers on Tap</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Local Awards</div>
+                </div>
+            </div>
+            
+            <div class="awards">
+                <div class="award">
+                    <i class="fas fa-award"></i>
+                    <h4>Best Gastropub 2022</h4>
+                    <p>Cityville Times</p>
+                </div>
+                <div class="award">
+                    <i class="fas fa-medal"></i>
+                    <h4>Craft Beer Excellence</h4>
+                    <p>Brewers Association</p>
+                </div>
+                <div class="award">
+                    <i class="fas fa-star"></i>
+                    <h4>People's Choice Award</h4>
+                    <p>Local Eats Magazine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Today Section -->
+    <section class="visit-today">
+        <div class="container">
+            <div class="visit-content">
+                <h2>Visit Us Today</h2>
+                <p>Experience the perfect intersection of food, drinks, and community at Cityville's favorite gathering spot.</p>
+                
+                <div class="hours-info">
+                    <h4>Opening Hours</h4>
+                    <p><strong>Mon-Thu:</strong> 4PM - 12AM</p>
+                    <p><strong>Fri-Sat:</strong> 12PM - 2AM</p>
+                    <p><strong>Sunday:</strong> 12PM - 10PM</p>
+                    <p><em>Happy Hour: Mon-Fri 4PM-7PM</em></p>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="contact.html#reservation" class="cta-button">Make a Reservation</a>
+                    <a href="contact.html" class="cta-button secondary">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>T Junction Tavern</h3>
+                    <p>Where great food, exceptional drinks, and warm company intersect. Experience the perfect blend of traditional tavern hospitality and modern gastropub excellence.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Opening Hours</h3>
+                    <ul class="footer-links">
+                        <li>Monday - Thursday: 4PM - 12AM</li>
+                        <li>Friday - Saturday: 12PM - 2AM</li>
+                        <li>Sunday: 12PM - 10PM</li>
+                        <li>Happy Hour: Mon-Fri 4PM-7PM</li>
+                        <li>Brunch: Saturday & Sunday 12PM-4PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 T Junction Tavern. All rights reserved. | Crafted with passion for good food and great company.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Video Loading Handler
+        const heroVideo = document.getElementById('heroVideo');
+        const videoLoading = document.getElementById('videoLoading');
+        
+        if (heroVideo) {
+            // Show loading indicator
+            videoLoading.classList.remove('hidden');
+            
+            // When video metadata is loaded
+            heroVideo.addEventListener('loadeddata', function() {
+                // Add loaded class to fade in video
+                setTimeout(() => {
+                    heroVideo.classList.add('loaded');
+                }, 300);
+                
+                // Hide loading indicator after video starts playing
+                setTimeout(() => {
+                    videoLoading.classList.add('hidden');
+                }, 1500);
+            });
+            
+            // If video fails to load
+            heroVideo.addEventListener('error', function() {
+                console.log('Video failed to load, using underlay image only');
+                videoLoading.classList.add('hidden');
+                // Underlay image will remain visible
+            });
+            
+            // If video loads but has issues playing
+            heroVideo.addEventListener('stalled', function() {
+                videoLoading.classList.add('hidden');
+            });
+        }
+        
+        // Menu Tab Filtering
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                menuTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Get category to filter
+                const category = this.getAttribute('data-category');
+                
+                // Show/hide menu items based on category
+                menuItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    if (category === 'all' || category === itemCategory) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        // Initialize menu items with animation
+        menuItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe experience cards
+        document.querySelectorAll('.experience-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Observe atmosphere text
+        const atmosphereText = document.querySelector('.atmosphere-text');
+        if (atmosphereText) {
+            atmosphereText.style.opacity = '0';
+            atmosphereText.style.transform = 'translateX(-30px)';
+            atmosphereText.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        }
+        
+        // Observe gallery items
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+        
+        // Observe event cards
+        document.querySelectorAll('.event-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Observe proof stats
+        document.querySelectorAll('.proof-stat').forEach(stat => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'translateY(30px)';
+            stat.style.transition = 'all 0.6s ease';
+            observer.observe(stat);
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translate(0, 0)';
+                    
+                    // If it's a proof stat, add counting animation
+                    if (entry.target.classList.contains('proof-stat')) {
+                        const statNumber = entry.target.querySelector('.stat-number');
+                        if (statNumber) {
+                            const target = statNumber.textContent;
+                            const isRating = target.includes('★');
+                            const value = isRating ? parseFloat(target) : parseInt(target);
+                            
+                            let current = 0;
+                            const increment = value / 30;
+                            
+                            const timer = setInterval(() => {
+                                current += increment;
+                                if (current >= value) {
+                                    statNumber.textContent = target;
+                                    clearInterval(timer);
+                                } else {
+                                    if (isRating) {
+                                        statNumber.textContent = current.toFixed(1) + '★';
+                                    } else {
+                                        statNumber.textContent = Math.floor(current);
+                                    }
+                                }
+                            }, 50);
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.querySelectorAll('.experience-card, .atmosphere-text, .gallery-item, .event-card, .proof-stat').forEach(el => {
+            animateOnScroll.observe(el);
+        });
+        
+        // Animate menu items initially
+        setTimeout(() => {
+            menuItems.forEach(item => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            });
+        }, 500);
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.98)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+        
+        // Video fallback for browsers that block autoplay
+        const playVideo = () => {
+            if (heroVideo && heroVideo.paused) {
+                const promise = heroVideo.play();
+                if (promise !== undefined) {
+                    promise.catch(() => {
+                        // Autoplay prevented, show play button or just keep image
+                        console.log('Autoplay prevented by browser');
+                    });
+                }
+            }
+        };
+        
+        // Try to play video on page load
+        window.addEventListener('load', playVideo);
+        
+        // Try to play video on user interaction (for stricter browsers)
+        document.addEventListener('click', playVideo);
+        document.addEventListener('touchstart', playVideo);
+    </script>
+</body>
+</html>

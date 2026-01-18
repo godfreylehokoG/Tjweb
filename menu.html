@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T Junction Tavern | Menu - Gastropub Fare & Craft Drinks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --gray: #444;
+            --light-gray: #e9e9e9;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a.active {
+            color: var(--secondary);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #a30000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        /* Menu Hero Section */
+        .menu-hero {
+            background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.9)), url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .menu-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .menu-hero h1 span {
+            color: var(--secondary);
+        }
+
+        .menu-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Menu Navigation */
+        .menu-nav {
+            background-color: var(--light);
+            padding: 20px 0;
+            position: sticky;
+            top: 85px;
+            z-index: 999;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .menu-nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .menu-nav-link {
+            background-color: white;
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .menu-nav-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .menu-nav-link.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Menu Category */
+        .menu-category {
+            margin-bottom: 80px;
+            scroll-margin-top: 160px;
+        }
+
+        .menu-category-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .menu-category-title h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .menu-category-title h3::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -17px;
+            left: 0;
+        }
+
+        .category-description {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            max-width: 800px;
+        }
+
+        /* Menu Items Grid */
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            gap: 20px;
+            border-left: 4px solid transparent;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-left-color: var(--secondary);
+        }
+
+        .menu-item-image {
+            flex: 0 0 120px;
+            height: 120px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-details {
+            flex: 1;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-title {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-right: 15px;
+        }
+
+        .menu-item-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            white-space: nowrap;
+        }
+
+        .menu-item-description {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .menu-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .menu-tag {
+            background-color: var(--light);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .menu-tag.vegetarian {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .menu-tag.spicy {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .menu-tag.gluten-free {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .menu-tag.chef-recommendation {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        /* Signature Dishes Section */
+        .signature-dishes {
+            background-color: var(--light);
+        }
+
+        .signature-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .signature-slide {
+            display: none;
+            position: relative;
+        }
+
+        .signature-slide.active {
+            display: block;
+        }
+
+        .signature-image {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .signature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .signature-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+            padding: 30px;
+        }
+
+        .signature-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .signature-content p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .signature-price {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .slider-arrow {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .slider-arrow:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Beverage Menu */
+        .beverage-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .beverage-category {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .beverage-category h4 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .beverage-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+
+        .beverage-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .beverage-name {
+            font-weight: 600;
+        }
+
+        .beverage-details {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 3px;
+        }
+
+        /* Dietary Info Section */
+        .dietary-info {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        .dietary-info .section-title h2 {
+            color: white;
+        }
+
+        .dietary-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .dietary-icon {
+            text-align: center;
+            max-width: 150px;
+        }
+
+        .dietary-icon i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .dietary-icon.vegetarian i {
+            color: #4caf50;
+        }
+
+        .dietary-icon.spicy i {
+            color: #ff5252;
+        }
+
+        .dietary-icon.gluten-free i {
+            color: #ff9800;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .menu-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+            }
+            
+            .menu-item-image {
+                flex: 0 0 200px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .menu-hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .menu-nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu-nav-link {
+                width: 100%;
+                text-align: center;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .menu-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .menu-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .menu-item {
+                padding: 20px;
+            }
+            
+            .menu-category-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-beer logo-icon"></i>
+                <div class="logo-text">T <span>JUNCTION</span> TAVERN</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html#reservation" class="cta-button">Reserve a Table</a>
+        </div>
+    </header>
+
+    <!-- Menu Hero Section -->
+    <section class="menu-hero">
+        <div class="container">
+            <h1>Our <span>Menu</span></h1>
+            <p>Experience the perfect fusion of traditional pub favorites and modern gastropub cuisine. Every dish is crafted with locally sourced ingredients and passion.</p>
+            <a href="#starters" class="cta-button">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Navigation -->
+    <div class="menu-nav" id="menu-nav">
+        <div class="container menu-nav-container">
+            <a href="#starters" class="menu-nav-link active">Starters</a>
+            <a href="#mains" class="menu-nav-link">Mains</a>
+            <a href="#burgers" class="menu-nav-link">Burgers</a>
+            <a href="#signature" class="menu-nav-link">Signature Dishes</a>
+            <a href="#drinks" class="menu-nav-link">Drinks</a>
+            <a href="#desserts" class="menu-nav-link">Desserts</a>
+        </div>
+    </div>
+
+    <!-- Starters Section -->
+    <section id="starters" class="menu-category">
+        <div class="container">
+            <div class="menu-category-title">
+                <h3>Starters & Small Plates</h3>
+                <div class="section-subtitle">Perfect for sharing or starting your meal</div>
+            </div>
+            
+            <p class="category-description">Begin your T Junction Tavern experience with one of our delicious starters, perfect for sharing or as a light meal paired with one of our craft beers.</p>
+            
+            <div class="menu-items">
+                <!-- Starter 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Truffle Fries">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Truffle Parmesan Fries</h4>
+                            <div class="menu-item-price">$14</div>
+                        </div>
+                        <p class="menu-item-description">Crispy hand-cut fries tossed in white truffle oil, grated Parmesan, and fresh herbs. Served with house-made garlic aioli.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegetarian</span>
+                            <span class="menu-tag chef-recommendation">Chef's Pick</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Starter 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Buffalo Cauliflower">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Buffalo Cauliflower Bites</h4>
+                            <div class="menu-item-price">$13</div>
+                        </div>
+                        <p class="menu-item-description">Crispy beer-battered cauliflower tossed in spicy buffalo sauce. Served with celery sticks and blue cheese dressing.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegetarian</span>
+                            <span class="menu-tag spicy">Spicy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Starter 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1626645738671-9c2d4d7475ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Arancini">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Wild Mushroom Arancini</h4>
+                            <div class="menu-item-price">$16</div>
+                        </div>
+                        <p class="menu-item-description">Crispy risotto balls filled with wild mushrooms, mozzarella, and truffle. Served with roasted tomato sauce.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegetarian</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Starter 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1563379091339-03246963d9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bruschetta">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Heirloom Tomato Bruschetta</h4>
+                            <div class="menu-item-price">$15</div>
+                        </div>
+                        <p class="menu-item-description">Grilled sourdough topped with heirloom tomatoes, fresh basil, garlic, and extra virgin olive oil. Finished with balsamic glaze.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegetarian</span>
+                            <span class="menu-tag gluten-free">Gluten-Free Option</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mains Section -->
+    <section id="mains" class="menu-category">
+        <div class="container">
+            <div class="menu-category-title">
+                <h3>Main Courses</h3>
+                <div class="section-subtitle">Hearty dishes for every appetite</div>
+            </div>
+            
+            <p class="category-description">Our main courses showcase the best of modern gastropub cuisine, featuring premium proteins, seasonal vegetables, and house-made sauces.</p>
+            
+            <div class="menu-items">
+                <!-- Main 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fish and Chips">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Beer-Battered Fish & Chips</h4>
+                            <div class="menu-item-price">$24</div>
+                        </div>
+                        <p class="menu-item-description">Local cod in our house IPA batter with hand-cut fries, minted peas, house-made tartar sauce, and malt vinegar.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag chef-recommendation">Chef's Pick</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Steak Frites">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Steak Frites</h4>
+                            <div class="menu-item-price">$32</div>
+                        </div>
+                        <p class="menu-item-description">8oz flat iron steak cooked to perfection, served with hand-cut fries, herb butter, and watercress salad.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag gluten-free">Gluten-Free</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wild Mushroom Flatbread">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Wild Mushroom Flatbread</h4>
+                            <div class="menu-item-price">$20</div>
+                        </div>
+                        <p class="menu-item-description">Wood-fired flatbread with wild mushrooms, truffle oil, goat cheese, caramelized onions, and fresh herbs.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegetarian</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Braised Short Rib">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Braised Beef Short Rib</h4>
+                            <div class="menu-item-price">$28</div>
+                        </div>
+                        <p class="menu-item-description">Red wine-braised beef short rib served with creamy mashed potatoes, glazed carrots, and red wine reduction.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag gluten-free">Gluten-Free</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Burgers Section -->
+    <section id="burgers" class="menu-category">
+        <div class="container">
+            <div class="menu-category-title">
+                <h3>Signature Burgers</h3>
+                <div class="section-subtitle">All burgers served with hand-cut fries or salad</div>
+            </div>
+            
+            <p class="category-description">Our burgers are made with locally sourced, grass-fed beef brisket and chuck blend, served on brioche buns baked fresh daily. All burgers can be made with a vegan patty or grilled chicken.</p>
+            
+            <div class="menu-items">
+                <!-- Burger 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Truffle Burger">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">The Junction Burger</h4>
+                            <div class="menu-item-price">$19</div>
+                        </div>
+                        <p class="menu-item-description">Our signature burger with black truffle aioli, aged cheddar, crispy shallots, arugula, and garlic confit on brioche.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag chef-recommendation">Most Popular</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Burger 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="BBQ Burger">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">BBQ Bacon Burger</h4>
+                            <div class="menu-item-price">$21</div>
+                        </div>
+                        <p class="menu-item-description">Beef patty with house-smoked bacon, cheddar, crispy onion strings, BBQ sauce, and pickles.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag spicy">Spicy Option</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Burger 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mushroom Swiss Burger">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Mushroom Swiss Burger</h4>
+                            <div class="menu-item-price">$20</div>
+                        </div>
+                        <p class="menu-item-description">Beef patty topped with sautéed wild mushrooms, melted Swiss cheese, caramelized onions, and garlic aioli.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag">House Specialty</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Burger 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1551615593-ef5fe247e8f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vegan Burger">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Beyond Junction Burger</h4>
+                            <div class="menu-item-price">$18</div>
+                        </div>
+                        <p class="menu-item-description">Plant-based patty with vegan cheddar, avocado, tomato, lettuce, and special sauce on a vegan brioche bun.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag vegetarian">Vegan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Dishes Slider -->
+    <section id="signature" class="signature-dishes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Signature Dishes</h2>
+            </div>
+            
+            <div class="signature-slider">
+                <div class="signature-slide active">
+                    <div class="signature-image">
+                        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Steak Frites">
+                    </div>
+                    <div class="signature-content">
+                        <h3>Steak Frites</h3>
+                        <p>Our most popular main course - 8oz flat iron steak cooked to perfection with hand-cut fries and herb butter.</p>
+                        <div class="signature-price">$32</div>
+                    </div>
+                </div>
+                
+                <div class="signature-slide">
+                    <div class="signature-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="The Junction Burger">
+                    </div>
+                    <div class="signature-content">
+                        <h3>The Junction Burger</h3>
+                        <p>Our signature burger with black truffle aioli, aged cheddar, crispy shallots, arugula, and garlic confit.</p>
+                        <div class="signature-price">$19</div>
+                    </div>
+                </div>
+                
+                <div class="signature-slide">
+                    <div class="signature-image">
+                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Truffle Parmesan Fries">
+                    </div>
+                    <div class="signature-content">
+                        <h3>Truffle Parmesan Fries</h3>
+                        <p>Crispy hand-cut fries tossed in white truffle oil, grated Parmesan, and fresh herbs. Served with garlic aioli.</p>
+                        <div class="signature-price">$14</div>
+                    </div>
+                </div>
+                
+                <div class="slider-arrows">
+                    <div class="slider-arrow prev"><i class="fas fa-chevron-left"></i></div>
+                    <div class="slider-arrow next"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+            
+            <div class="slider-nav">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drinks Section -->
+    <section id="drinks" class="menu-category">
+        <div class="container">
+            <div class="menu-category-title">
+                <h3>Craft Drinks</h3>
+                <div class="section-subtitle">Local brews, handcrafted cocktails, and fine wines</div>
+            </div>
+            
+            <div class="beverage-categories">
+                <!-- Cocktails -->
+                <div class="beverage-category">
+                    <h4>Signature Cocktails</h4>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Junction Old Fashioned</div>
+                            <div class="beverage-details">Bourbon, smoked maple syrup, orange bitters</div>
+                        </div>
+                        <div class="beverage-price">$14</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Crossroads Mule</div>
+                            <div class="beverage-details">Vodka, ginger beer, lime, mint</div>
+                        </div>
+                        <div class="beverage-price">$13</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Tavern's Twilight</div>
+                            <div class="beverage-details">Gin, elderflower liqueur, grapefruit, rosemary</div>
+                        </div>
+                        <div class="beverage-price">$15</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Spicy Paloma</div>
+                            <div class="beverage-details">Tequila, grapefruit, jalapeño, lime, soda</div>
+                        </div>
+                        <div class="beverage-price">$14</div>
+                    </div>
+                </div>
+                
+                <!-- Beers -->
+                <div class="beverage-category">
+                    <h4>Local Craft Beers</h4>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Cityville IPA</div>
+                            <div class="beverage-details">Citrusy, hoppy, 6.5% ABV</div>
+                        </div>
+                        <div class="beverage-price">$8</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Crossroads Amber Ale</div>
+                            <div class="beverage-details">Malty, smooth, 5.2% ABV</div>
+                        </div>
+                        <div class="beverage-price">$7</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Farmhouse Saison</div>
+                            <div class="beverage-details">Peppery, dry, 6.8% ABV</div>
+                        </div>
+                        <div class="beverage-price">$9</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Tavern Stout</div>
+                            <div class="beverage-details">Roasty, chocolate notes, 5.8% ABV</div>
+                        </div>
+                        <div class="beverage-price">$8</div>
+                    </div>
+                </div>
+                
+                <!-- Wines -->
+                <div class="beverage-category">
+                    <h4>Wines by the Glass</h4>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Chardonnay, Sonoma Coast</div>
+                            <div class="beverage-details">Buttery, oak, citrus finish</div>
+                        </div>
+                        <div class="beverage-price">$12</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Sauvignon Blanc, NZ</div>
+                            <div class="beverage-details">Crisp, tropical fruit, herbal</div>
+                        </div>
+                        <div class="beverage-price">$11</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Pinot Noir, Willamette Valley</div>
+                            <div class="beverage-details">Cherry, earthy, smooth tannins</div>
+                        </div>
+                        <div class="beverage-price">$14</div>
+                    </div>
+                    <div class="beverage-item">
+                        <div>
+                            <div class="beverage-name">Cabernet, Napa Valley</div>
+                            <div class="beverage-details">Blackberry, vanilla, full-bodied</div>
+                        </div>
+                        <div class="beverage-price">$16</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desserts Section -->
+    <section id="desserts" class="menu-category">
+        <div class="container">
+            <div class="menu-category-title">
+                <h3>Sweet Endings</h3>
+                <div class="section-subtitle">Decadent desserts to complete your meal</div>
+            </div>
+            
+            <div class="menu-items">
+                <!-- Dessert 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chocolate Lava Cake">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Chocolate Lava Cake</h4>
+                            <div class="menu-item-price">$11</div>
+                        </div>
+                        <p class="menu-item-description">Warm chocolate cake with a molten center, served with vanilla bean ice cream and raspberry coulis.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag chef-recommendation">Most Popular</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dessert 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1559620192-032c64bc86af?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="New York Cheesecake">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">New York Cheesecake</h4>
+                            <div class="menu-item-price">$10</div>
+                        </div>
+                        <p class="menu-item-description">Classic creamy cheesecake with graham cracker crust, served with berry compote and whipped cream.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag">House Specialty</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dessert 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1568302015754-9f1e7d0d72d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Apple Tart">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Caramel Apple Tart</h4>
+                            <div class="menu-item-price">$12</div>
+                        </div>
+                        <p class="menu-item-description">Warm apple tart with cinnamon, served with salted caramel sauce and vanilla ice cream.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag">Seasonal</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dessert 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Affogato">
+                    </div>
+                    <div class="menu-item-details">
+                        <div class="menu-item-header">
+                            <h4 class="menu-item-title">Espresso Affogato</h4>
+                            <div class="menu-item-price">$9</div>
+                        </div>
+                        <p class="menu-item-description">Vanilla bean ice cream "drowned" in a shot of hot espresso, served with biscotti.</p>
+                        <div class="menu-item-tags">
+                            <span class="menu-tag">Perfect After Dinner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dietary Information Section -->
+    <section class="dietary-info">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dietary Information</h2>
+            </div>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; color: #ccc;">We accommodate various dietary preferences. Please inform your server of any allergies or dietary restrictions. GF = Gluten-Free options available</p>
+            
+            <div class="dietary-icons">
+                <div class="dietary-icon vegetarian">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Vegetarian</h4>
+                    <p>Plant-based options available</p>
+                </div>
+                <div class="dietary-icon spicy">
+                    <i class="fas fa-pepper-hot"></i>
+                    <h4>Spicy</h4>
+                    <p>Indicates spicy dishes</p>
+                </div>
+                <div class="dietary-icon gluten-free">
+                    <i class="fas fa-seedling"></i>
+                    <h4>Gluten-Free</h4>
+                    <p>GF options available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>T Junction Tavern</h3>
+                    <p>Where great food, exceptional drinks, and warm company intersect. Experience the perfect blend of traditional tavern hospitality and modern gastropub excellence.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Opening Hours</h3>
+                    <ul class="footer-links">
+                        <li>Monday - Thursday: 4PM - 12AM</li>
+                        <li>Friday - Saturday: 12PM - 2AM</li>
+                        <li>Sunday: 12PM - 10PM</li>
+                        <li>Happy Hour: Mon-Fri 4PM-7PM</li>
+                        <li>Brunch: Saturday & Sunday 12PM-4PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 T Junction Tavern. All rights reserved. | Menu items and prices subject to change. Please inform your server of any allergies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Navigation
+        const menuNavLinks = document.querySelectorAll('.menu-nav-link');
+        const menuCategories = document.querySelectorAll('.menu-category');
+        
+        menuNavLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                menuNavLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to target section
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 140,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            menuCategories.forEach(category => {
+                const categoryTop = category.offsetTop;
+                const categoryHeight = category.clientHeight;
+                
+                if (pageYOffset >= (categoryTop - 200)) {
+                    current = category.getAttribute('id');
+                }
+            });
+            
+            menuNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Signature Dishes Slider
+        const slides = document.querySelectorAll('.signature-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentSlide = 0;
+        
+        function showSlide(n) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Calculate slide index
+            if (n >= slides.length) {
+                currentSlide = 0;
+            } else if (n < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = n;
+            }
+            
+            // Show current slide and activate corresponding dot
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        // Next/previous controls
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+        }
+        
+        // Dot controls
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Initialize the slider
+        showSlide(0);
+        
+        // Add some animation to menu items when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Apply to menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

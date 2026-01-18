@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T Junction Tavern | Events - Live Music & Specials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8B0000;
+            --secondary: #D4AF37;
+            --dark: #1A1A1A;
+            --light: #F8F5F0;
+            --gray: #444;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            color: var(--secondary);
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a.active {
+            color: var(--secondary);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #a30000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+        }
+
+        /* Events Hero Section */
+        .events-hero {
+            background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.9)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .events-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .events-hero h1 span {
+            color: var(--secondary);
+        }
+
+        .events-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            background-color: var(--light);
+        }
+
+        .calendar-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .calendar-sidebar {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .calendar-main {
+            flex: 2;
+        }
+
+        .calendar-filter {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .calendar-filter h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-option input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .filter-option label {
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .event-highlight {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-highlight h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .highlight-event {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-date {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .highlight-event h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+
+        .event-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .event-details {
+            padding: 25px;
+        }
+
+        .event-date-time {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .event-date, .event-time {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .event-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .event-description {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .event-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Regular Events Section */
+        .regular-events {
+            background-color: var(--dark);
+            color: white;
+        }
+
+        .regular-events .section-title h2 {
+            color: white;
+        }
+
+        .regular-events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .regular-event-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 30px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .regular-event-day {
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .regular-event-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Private Events Section */
+        .private-events {
+            text-align: center;
+        }
+
+        .private-events-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .private-events-content p {
+            margin-bottom: 30px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .amenities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .amenity {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .amenity i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 25px 30px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .modal-body {
+            padding: 25px 30px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .calendar-container {
+                flex-direction: column;
+            }
+            
+            .calendar-sidebar {
+                max-width: 100%;
+            }
+            
+            .events-hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .events-hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .events-hero {
+                padding: 100px 0 60px;
+            }
+            
+            .events-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .event-details {
+                padding: 20px;
+            }
+            
+            .modal-body, .modal-header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-beer logo-icon"></i>
+                <div class="logo-text">T <span>JUNCTION</span> TAVERN</div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html#reservation" class="cta-button">Reserve a Table</a>
+        </div>
+    </header>
+
+    <!-- Events Hero Section -->
+    <section class="events-hero">
+        <div class="container">
+            <h1>Events & <span>Entertainment</span></h1>
+            <p>From live music and trivia nights to special tastings and seasonal celebrations, there's always something happening at T Junction Tavern.</p>
+            <a href="#upcoming" class="cta-button">View Upcoming Events</a>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section id="upcoming">
+        <div class="container">
+            <div class="section-title">
+                <h2>Upcoming Events</h2>
+            </div>
+            
+            <div class="calendar-container">
+                <!-- Sidebar with filters and highlights -->
+                <div class="calendar-sidebar">
+                    <div class="calendar-filter">
+                        <h3>Filter Events</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="music" checked>
+                                <label for="music">Live Music</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="trivia" checked>
+                                <label for="trivia">Trivia Nights</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="tasting" checked>
+                                <label for="tasting">Tastings</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="special" checked>
+                                <label for="special">Special Events</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="sports" checked>
+                                <label for="sports">Sports Viewing</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-highlight">
+                        <h3>Featured Event</h3>
+                        <div class="highlight-event">
+                            <div class="highlight-date">Saturday, June 15</div>
+                            <h4>Brewmaster's Dinner</h4>
+                            <p>A 5-course beer pairing dinner featuring local craft breweries. Limited seating available.</p>
+                            <button class="cta-button" style="margin-top: 15px; padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('brewmaster')">Learn More</button>
+                        </div>
+                        
+                        <div class="highlight-event">
+                            <div class="highlight-date">Friday, June 21</div>
+                            <h4>Summer Solstice Party</h4>
+                            <p>Celebrate the longest day of the year with live bands, special cocktails, and outdoor seating.</p>
+                            <button class="cta-button" style="margin-top: 15px; padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('solstice')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Events Calendar -->
+                <div class="calendar-main">
+                    <div class="events-grid">
+                        <!-- Event 1 -->
+                        <div class="event-card" data-type="music">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Live Acoustic Session">
+                                <div class="event-type">Live Music</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>Every Thursday</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>8:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Acoustic Thursdays</h3>
+                                <p class="event-description">Intimate performances from local and touring acoustic artists. Relaxed atmosphere perfect for winding down your week.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">No Cover</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('acoustic')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 2 -->
+                        <div class="event-card" data-type="trivia">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" alt="Trivia Night">
+                                <div class="event-type">Trivia Night</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>Every Tuesday</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>7:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Tuesday Trivia</h3>
+                                <p class="event-description">Gather your team for our legendary trivia night. Win prizes and bragging rights! Categories change weekly.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">Free Entry</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('trivia')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 3 -->
+                        <div class="event-card" data-type="tasting">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Whiskey Tasting">
+                                <div class="event-type">Tasting</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>June 10</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>6:30 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Scotch Whiskey Tasting</h3>
+                                <p class="event-description">Join our resident whiskey expert for an exploration of premium single malt scotches from different regions.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">$45/person</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('whiskey')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 4 -->
+                        <div class="event-card" data-type="sports">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sports Viewing">
+                                <div class="event-type">Sports Viewing</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>June 12</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>5:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Champions League Final</h3>
+                                <p class="event-description">Watch the biggest soccer match of the year on our giant screen. Drink specials and game-day menu available.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">No Cover</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('champions')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 5 -->
+                        <div class="event-card" data-type="music">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Jazz Night">
+                                <div class="event-type">Live Music</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>June 14</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>9:00 PM</span>
+                                    </div>
+                                </div>
+                                <h3>Friday Night Jazz</h3>
+                                <p class="event-description">Smooth jazz from The Crossroads Trio. Perfect for date night or a sophisticated evening out with friends.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">$10 Cover</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('jazz')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 6 -->
+                        <div class="event-card" data-type="special">
+                            <div class="event-image">
+                                <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Father's Day Brunch">
+                                <div class="event-type">Special Event</div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-date-time">
+                                    <div class="event-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>June 16</span>
+                                    </div>
+                                    <div class="event-time">
+                                        <i class="far fa-clock"></i>
+                                        <span>11:00 AM</span>
+                                    </div>
+                                </div>
+                                <h3>Father's Day Brunch</h3>
+                                <p class="event-description">Treat Dad to our special brunch buffet with carving station, build-your-own Bloody Mary bar, and live music.</p>
+                                <div class="event-footer">
+                                    <div class="event-price">$32/person</div>
+                                    <button class="cta-button" style="padding: 8px 15px; font-size: 0.9rem;" onclick="openModal('fathersday')">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regular Events Section -->
+    <section class="regular-events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Weekly Schedule</h2>
+            </div>
+            <div class="regular-events-grid">
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Mondays</div>
+                    <h3>Mellow Mondays</h3>
+                    <p>Half-price craft beers and 25% off select appetizers. The perfect way to start your week.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Tuesdays</div>
+                    <h3>Trivia Night</h3>
+                    <p>7 PM start. Gather your smartest friends for a chance to win bar tabs and prizes.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Wednesdays</div>
+                    <h3>Wine Down Wednesday</h3>
+                    <p>Half-price bottles of wine and live piano music from 7-10 PM.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Thursdays</div>
+                    <h3>Acoustic Sessions</h3>
+                    <p>Live acoustic performances starting at 8 PM. No cover charge.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Fridays</div>
+                    <h3>Friday Night Live</h3>
+                    <p>Full bands, DJ sets, or special performances starting at 9 PM.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Saturdays</div>
+                    <h3>Saturday Showcase</h3>
+                    <p>Featured performers and drink specials all night long.</p>
+                </div>
+                <div class="regular-event-card">
+                    <div class="regular-event-day">Sundays</div>
+                    <h3>Sunday Funday</h3>
+                    <p>Brunch from 11AM-4PM, bottomless mimosas, and NFL games on our big screens.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Private Events Section -->
+    <section class="private-events">
+        <div class="container">
+            <div class="section-title">
+                <h2>Private Events & Parties</h2>
+            </div>
+            <div class="private-events-content">
+                <p>Host your next celebration at T Junction Tavern! Our private dining room accommodates up to 40 guests for seated dinners or 60 for cocktail-style events. We offer customizable menus, dedicated staff, and AV equipment for presentations or entertainment.</p>
+                
+                <div class="amenities-list">
+                    <div class="amenity">
+                        <i class="fas fa-users"></i>
+                        <h4>Up to 60 Guests</h4>
+                    </div>
+                    <div class="amenity">
+                        <i class="fas fa-utensils"></i>
+                        <h4>Customizable Menu</h4>
+                    </div>
+                    <div class="amenity">
+                        <i class="fas fa-music"></i>
+                        <h4>AV Equipment</h4>
+                    </div>
+                    <div class="amenity">
+                        <i class="fas fa-glass-cheers"></i>
+                        <h4>Bar Service</h4>
+                    </div>
+                </div>
+                
+                <p>Contact our events team to discuss your needs and receive a customized quote.</p>
+                <a href="contact.html" class="cta-button">Inquire About Private Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>T Junction Tavern</h3>
+                    <p>Where great food, exceptional drinks, and warm company intersect. Experience the perfect blend of traditional tavern hospitality and modern gastropub excellence.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Opening Hours</h3>
+                    <ul class="footer-links">
+                        <li>Monday - Thursday: 4PM - 12AM</li>
+                        <li>Friday - Saturday: 12PM - 2AM</li>
+                        <li>Sunday: 12PM - 10PM</li>
+                        <li>Happy Hour: Mon-Fri 4PM-7PM</li>
+                        <li>Brunch: Saturday & Sunday 12PM-4PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 T Junction Tavern. All rights reserved. | Designed with passion for good food and great company.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Event Detail Modals -->
+    <div id="brewmaster-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Brewmaster's Dinner</h3>
+            </div>
+            <div class="modal-body">
+                <p><strong>Date:</strong> Saturday, June 15, 2023</p>
+                <p><strong>Time:</strong> 6:30 PM - 9:30 PM</p>
+                <p><strong>Price:</strong> $85 per person (includes 5-course meal with beer pairings)</p>
+                <p><strong>Location:</strong> Private Dining Room, T Junction Tavern</p>
+                
+                <h4>Event Details</h4>
+                <p>Join us for an exclusive evening celebrating the art of craft brewing. This 5-course dinner pairs culinary creations from our executive chef with exceptional beers from three local breweries:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Cityville Brewing Co. - Known for their innovative IPAs</li>
+                    <li>Crossroads Ales - Traditional English-style ales</li>
+                    <li>Farmhouse Brewery - Seasonal and farm-to-glass creations</li>
+                </ul>
+                
+                <p>Each course will be introduced by the brewers themselves, offering insight into their process and philosophy. The menu includes both meat and vegetarian options (please indicate dietary restrictions when booking).</p>
+                
+                <p><strong>Limited to 30 guests only.</strong> Reservations must be made in advance.</p>
+                
+                <a href="contact.html#reservation" class="cta-button">Reserve Your Spot</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="solstice-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Summer Solstice Party</h3>
+            </div>
+            <div class="modal-body">
+                <p><strong>Date:</strong> Friday, June 21, 2023</p>
+                <p><strong>Time:</strong> 5:00 PM - 1:00 AM</p>
+                <p><strong>Price:</strong> No cover charge until 9 PM, $10 after</p>
+                <p><strong>Location:</strong> Main Tavern & Outdoor Patio</p>
+                
+                <h4>Event Details</h4>
+                <p>Celebrate the longest day of the year with our annual Summer Solstice Party! We're extending our patio hours and bringing the festivities outdoors with:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Live music from three bands starting at 6 PM</li>
+                    <li>Special "Solstice Sips" cocktail menu featuring seasonal ingredients</li>
+                    <li>Outdoor grilling station with summer favorites</li>
+                    <li>Fire pits for evening gatherings</li>
+                    <li>Summer-themed decorations and photo opportunities</li>
+                </ul>
+                
+                <p>The party starts at 5 PM with happy hour pricing on all drinks until 7 PM. Live music schedule:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>6:00 PM - The Sunset Strings (acoustic)</li>
+                    <li>8:00 PM - The Longest Day Band (rock/pop covers)</li>
+                    <li>10:00 PM - DJ Summer Nights (dance mixes)</li>
+                </ul>
+                
+                <p>No reservations needed for groups under 6. For larger groups, please contact us in advance.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="acoustic-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Acoustic Thursdays</h3>
+            </div>
+            <div class="modal-body">
+                <p><strong>Date:</strong> Every Thursday</p>
+                <p><strong>Time:</strong> 8:00 PM - 11:00 PM</p>
+                <p><strong>Price:</strong> No cover charge</p>
+                <p><strong>Location:</strong> Main Tavern Area</p>
+                
+                <h4>Event Details</h4>
+                <p>Wind down your week with intimate acoustic performances in our cozy tavern setting. Each week features a different local or touring artist showcasing their talent in a relaxed, unplugged format.</p>
+                
+                <h4>June Schedule:</h4>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>June 6: Sarah Mitchell - Folk singer-songwriter</li>
+                    <li>June 13: The River Bend Duo - Bluegrass and Americana</li>
+                    <li>June 20: James Wilson - Acoustic covers of 90s classics</li>
+                    <li>June 27: Elena Rodriguez - Jazz-infused acoustic soul</li>
+                </ul>
+                
+                <p>Enjoy our Thursday specials during the show:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>$5 select craft beers</li>
+                    <li>$7 house wines</li>
+                    <li>20% off shareable appetizers</li>
+                </ul>
+                
+                <p>No reservations needed. Seating is first-come, first-served. Arrive early for the best spots!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Event Filtering
+        const filterCheckboxes = document.querySelectorAll('.filter-options input');
+        const eventCards = document.querySelectorAll('.event-card');
+        
+        filterCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', filterEvents);
+        });
+        
+        function filterEvents() {
+            const selectedTypes = Array.from(filterCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.id);
+            
+            eventCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                
+                if (selectedTypes.includes(cardType)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(`${modalId}-modal`);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+            });
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside content
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+        
+        // Set current date in the featured events
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateElements = document.querySelectorAll('.highlight-date');
+        
+        // For demo purposes, we'll set the first date to today + 7 days
+        const nextWeek = new Date(today);
+        nextWeek.setDate(today.getDate() + 7);
+        dateElements[0].textContent = nextWeek.toLocaleDateString('en-US', options);
+        
+        // And the second date to today + 14 days
+        const twoWeeks = new Date(today);
+        twoWeeks.setDate(today.getDate() + 14);
+        dateElements[1].textContent = twoWeeks.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>
